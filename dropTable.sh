@@ -15,8 +15,17 @@ then
 	echo
 	echo -e "${Green}Table deleted succesfully${Defualt}"
 	sleep 1 
-	./mainmenu.sh
-else
+	echo -e "${Blue}Press any key to go back to the main menu${Defualt}"
+	echo
+	read key
+	case $key in
+	
+		*)   
+			./mainmenu.sh
+			;;
+
+	esac
+	else
 	echo -e "${Red}--> ERROR Enter Exsisted Table Name !!${Defualt}"
 	./dropTable.sh
 fi

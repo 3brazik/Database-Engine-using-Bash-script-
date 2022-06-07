@@ -10,11 +10,10 @@ if [ -f "./databases/$dbname/$tablename" ]; then
 	    echo
 		echo -e "${Green}-----> Connected to $tablename table .....${Defualt}";
 		echo
-		echo -e "${Blue}Table $tablename Schema: ${Defualt}"
-		cat ./databases/$dbname/.$tablename.colmetadata;
-        echo
-        echo -e "${Blue}Table $tablename Data:${Defualt}"
-        cat ./databases/$dbname/$tablename ;
+		# Metadata
+		awk -v var=$tablename 'BEGIN {FS=":"; print "\t\tTable Name: " var "\n"} {if(NR>1) printf     $1"<"$2">  \t\t"} END{printf "\n"}' "./databases/$dbname/.${tablename}.colmetadata"
+		# Data
+		awk 'BEGIN{FS=":";OFS="\t   \t\t";ORS="\n";}{  $1=$1; print substr($0, 1, length($0)-1) }' "./databases/$dbname/$tablename"
 		echo
 	else 
 	echo
@@ -100,8 +99,10 @@ length="${#record[@]}"
 #show the data record to the user 
 echo 
 echo -e "${Green}Here Is The Record Found.${Defualt}"
-awk -v var=$tablename 'BEGIN {FS=":"; print "\t\tTable Name: " var "\n"} {if(NR>1) printf " "$1"<"$2">\t\t"} END{printf "\n"}' "./databases/$dbname/.${tablename}.colmetadata"
-awk -v var=$recLineNumber 'BEGIN{FS=":";OFS="\t\t\t";ORS="\n";}{  if(NR==var){ $1=$1; print " "substr($0, 1, length($0)-2)}}' "./databases/$dbname/$tablename"
+# Metadata
+awk -v var=$tablename 'BEGIN {FS=":"; print "\t\tTable Name: " var "\n"} {if(NR>1) printf     $1"<"$2">  \t\t"} END{printf "\n"}' "./databases/$dbname/.${tablename}.colmetadata"
+# Data
+awk 'BEGIN{FS=":";OFS="\t   \t\t";ORS="\n";}{  $1=$1; print substr($0, 1, length($0)-1) }' "./databases/$dbname/$tablename"
 echo
 echo  -e "${Yellow}Please refere to the table schema ABOVE before UPDATING, considering each column DATATYPE !${Defualt}"
 #Getting Table Metadata for the table 
@@ -208,7 +209,11 @@ for (( i = 1; i <= $numColumns-2; i++ )); do
 	echo -e "${Green}Record Updated Successfully${Defualt}"
 	echo
 	echo -e "${Blue}Table $tablename values after UPDATE: ${Defualt}"
-	cat ./databases/$dbname/$tablename ;
+	# Metadata
+	awk -v var=$tablename 'BEGIN {FS=":"; print "\t\tTable Name: " var "\n"} {if(NR>1) printf     $1"<"$2">  \t\t"} END{printf "\n"}' "./databases/$dbname/.${tablename}.colmetadata"
+	# Data
+	awk 'BEGIN{FS=":";OFS="\t   \t\t";ORS="\n";}{  $1=$1; print substr($0, 1, length($0)-1) }' "./databases/$dbname/$tablename"
+	echo
 	# check if user want to update again in the record
 	echo
 	echo -e "${Blue}If You Want To UPDATE another value ENTER 'y' or 'Y' to UPDATE or PRESS any key to go to previous Main Menu: ${Defualt}" 
@@ -219,8 +224,6 @@ for (( i = 1; i <= $numColumns-2; i++ )); do
 		continue
 	else
 		
-		./mainmenu.sh
+		./submenu.sh
 	fi
-	 	
-
 done	

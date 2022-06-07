@@ -1,7 +1,8 @@
 #!/bin/bash
+echo
 echo -e "${Blue}Listing all Tables: ${Defualt}"
+echo
 ls ./databases/$dbname/$filename
-# ./DBMS/listTabel.sh
 echo
 echo -e "${Blue}Enter table name to insert: ${Defualt}"
 read tablename 
@@ -10,7 +11,8 @@ if [ -f "./databases/$dbname/$tablename" ]; then
 		echo -e "${Green}Connected to $tablename table${Defualt}";
 		echo -e "${Blue}Table $tablename Schema: ${Defualt}"
         echo
-		cat ./databases/$dbname/.$tablename.colmetadata;
+        # Metadata
+		awk -v var=$tablename 'BEGIN {FS=":"; print "\t\tTable Name: " var "\n"} {if(NR>1) printf     $1"<"$2">  \t\t"} END{printf "\n"}' "./databases/$dbname/.${tablename}.colmetadata"
 		echo
 		
 	else 
@@ -36,13 +38,7 @@ fi
         done
 
         colnum=$(wc -l "./databases/$dbname/.$tablename.colmetadata" | cut -f1 -d" ")
-        
-        #echo $pkHead
-        #echo $field1
-        #echo $field2
-        #echo $colnum
-        #echo $colname
-        #echo $coltype
+
 
     function check_datatype {
 	case "$1" in
@@ -67,10 +63,11 @@ fi
 function checkPkeyUnique {
     checkPK=1
     for i in $(cut -f1 -d: ./databases/$dbname/$tablename); do
-        if [[ $i = $primaryKey ]]; then
+        if [[ $i = $1 ]]; then
             checkPK=0
+            break
         fi
-        break
+
         done
     return $checkPK 
 }
@@ -82,15 +79,15 @@ while [ true ]; do
             #Checking if it contain colons
             if [ "$primaryKeyValue" = *:* ]; then
                 echo -e "${Red}Primary key cannot contain: ${Defualt}"
-                ./insertInTable.sh
+                continue
             fi
             #Checking if it contain spaces
             if [[ $primaryKeyValue = *" "* ]];then
 				echo
 				echo -e "${Red}--> ERROR : Primary key value cannot Contain space.${Defualt}"
 				echo
-                ./insertInTable.sh
-		    fi
+                continue		    
+            fi
 
 		    #Checking that  no special char in Database name 
 		    #if [[ $primaryKeyValue =~ ["!"?$%@"^"+="&""<".">""/"] ]];
@@ -107,20 +104,22 @@ while [ true ]; do
 		    	echo 
 		    	echo -e "${Red}--> ERROR: primary key value can not be Empty !${Defualt}"
 		    	echo
-		    	./insertInTable.sh
-		    fi
+                continue		
+            fi
             #Checking Data type of the inserted 
 		    if ! check_datatype "${coltype[0]}" "$primaryKeyValue" ; then
     
 		    	echo
 		    	echo -e "${Red}Primary key datatype value dose not match${Defualt}"
 		    	echo
-                ./insertInTable.sh
+               continue
 		    fi
+          
             #Checking if the the primary key is uniqe
-            if checkPkeyUnique "${colname[@]}" "$primaryKeyValue"; then
+            if  checkPkeyUnique "$primaryKeyValue" ; then
                 echo
                 echo -e "${Red}Primary key value is not unique !${Defualt}"
+               continue
             fi
 break   
 done    
@@ -135,22 +134,25 @@ for ((i = 1; i < $colnum-1; i++ )); do
         #Checking if it contain colons
         if [ "$values" = *:* ]; then
             echo -e "${Red}Column value cannot contain : ${Defualt}"
+            continue
         fi
         #Checking For Empty String
         if [ "$values" = "" ]; then
             echo -e "${Red}Column value cannot be empty ! ${Defualt}"
+            continue
         fi
         #Checking if it contain spaces
         if [ "$values" = *" "* ]; then
             echo -e "${Red}Column value cannot contain spaces ! ${Defualt}"
+            continue
         fi
         #Checking  the primary key data type
         if ! check_datatype "${coltype[$i]}" "$values" ; then
 	    	echo
 	    	echo -e "${Red}Entered values and column datatype value dose not match ! ${Defualt}"
 	    	echo
-            ./insertInTable.sh
-	    fi
+            continue	    
+         fi
         break
     done
     record+=("$values")
@@ -165,10 +167,17 @@ echo
 echo -e "${Blue} Table ${tablename} Data After insertion  ${Defualt}"
 echo
 # Metadata
-awk -v var=$tablename 'BEGIN {FS=":"; print "\t\tTable Name: " var "\n"} {if(NR>1) printf      $1"<"$2">\t\t"} END{printf "\n"}' "./databases/$dbname/.${tablename}.colmetadata"
+awk -v var=$tablename 'BEGIN {FS=":"; print "\t\tTable Name: " var "\n"} {if(NR>1) printf     $1"<"$2">  \t\t"} END{printf "\n"}' "./databases/$dbname/.${tablename}.colmetadata"
 # Data
-awk 'BEGIN{FS=":";OFS="\t\t\t";ORS="\n";}{  $1=$1; print substr($0, 1, length($0)-1) }' "./databases/$dbname/$tablename"
+awk 'BEGIN{FS=":";OFS="\t   \t\t";ORS="\n";}{  $1=$1; print substr($0, 1, length($0)-1) }' "./databases/$dbname/$tablename"
 echo
-sleep 2
-./submenu.sh
+sleep 1
+echo -e "${Blue}Press any key to go back to the Table menu${Defualt}"
+		echo
+		read key
+		case $key in
+            *)   
+				./submenu.sh
+				;;
+		esac
 

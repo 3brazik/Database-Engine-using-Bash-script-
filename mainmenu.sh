@@ -1,5 +1,5 @@
 #!/bin/bash
-
+clear
 #colors
 export Defualt='\033[0m'       # Text Reset
 export Red='\033[0;31m'          # Red
@@ -40,7 +40,7 @@ read option
 
 	*) 
 	   echo -e "${Red}Please Select Correctly from the options below: ${Defualt}"
-	   
+		sleep 1.5
 		./mainmenu.sh
 		;;
 

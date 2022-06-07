@@ -9,12 +9,10 @@ if [ -f "./databases/$dbname/$tablename" ]; then
 	    echo
 		echo -e "${Green}-----> Connected to $tablename table .....${Defualt}";
 		echo
-		echo -e "${Bule}Table $tablename Schema: ${Defualt}"
-		echo
-		cat ./databases/$dbname/.$tablename.colmetadata;
-        echo
-        echo -e "${Blue}Table $tablename Data${Defualt}"
-        cat ./databases/$dbname/$tablename ;
+		# Metadata
+		awk -v var=$tablename 'BEGIN {FS=":"; print "\t\tTable Name: " var "\n"} {if(NR>1) printf     $1"<"$2">  \t\t"} END{printf "\n"}' "./databases/$dbname/.${tablename}.colmetadata"
+		# Data
+		awk 'BEGIN{FS=":";OFS="\t   \t\t";ORS="\n";}{  $1=$1; print substr($0, 1, length($0)-1) }' "./databases/$dbname/$tablename"
 		echo
     else 
 	echo
@@ -25,7 +23,6 @@ fi
 
 function delete_record {
 	foundflagg=1
-	
 	for field in $(cut -f1 -d: "./databases/$dbname/$tablename"); do
 
 		if [[ $field = "$1" ]]; then
@@ -44,13 +41,24 @@ while [ true ]; do
 		echo -e "${Green}Record Deleted${Defualt}"
 		echo
 		echo -e "${Blue}Table records after deletion:${Defualt}"
-		cat ./databases/$dbname/$tablename ;
 		echo
+		# Metadata
+		awk -v var=$tablename 'BEGIN {FS=":"; print "\t\tTable Name: " var "\n"} {if(NR>1) printf     $1"<"$2">  \t\t"} END{printf "\n"}' "./databases/$dbname/.${tablename}.colmetadata"
+		# Data
+		awk 'BEGIN{FS=":";OFS="\t   \t\t";ORS="\n";}{  $1=$1; print substr($0, 1, length($0)-1) }' "./databases/$dbname/$tablename"
 		echo
-		./mainmenu.sh
+		sleep 1
+        echo -e "${Blue}Press any key to go back to the Table menu${Defualt}"
+		echo
+		read key
+		case $key in
+	
+			*)   
+				./submenu.sh
+				;;
+
+		esac
 	fi
-	
-	
 done
 
 

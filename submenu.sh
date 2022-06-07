@@ -1,6 +1,9 @@
 #!/bin/bash
+clear
 echo
 echo -e "${Green}**************************************************************************************************************"
+echo
+echo "Connected to $dbname Database"
 echo
 echo -e "${Yellow}Please Select one of the following options :-${Defualt}"
 echo
@@ -22,7 +25,7 @@ case $option in
 		;;
 	3)  ./dropTable.sh
 		;;
-	4)  ./SelectWhere.sh
+	4)  ./select.sh
 		;;
 	5)  ./deleteRecord.sh
 		;;
@@ -33,6 +36,7 @@ case $option in
 	8) ./mainmenu.sh	
 		;;
 	*) echo -e "${Red}Please select correctly from the options below: ${Defualt}"
+		sleep 1.5
 		./submenu.sh
 		;;
 esac

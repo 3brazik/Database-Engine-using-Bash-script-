@@ -1,15 +1,16 @@
 #!/bin/bash
 echo
+
+while [[ true ]];do
 echo -e "${Blue}Please enter table name:${Defualt}"
 read tablename
-while [[ true ]];do
 		#----> checking if contain spaces 
 		if [[ $tablename = *" "* ]];
 			then
 			echo
 			echo -e "${Red}--> ERROR : Table Name cannot Contain Space.${Defualt}"
 			echo
-			./createTable.sh
+			continue
 		fi
 		
 		#Checking that no special char in Database name 
@@ -19,7 +20,7 @@ while [[ true ]];do
 			echo
 			echo -e "${Red}--> ERROR : Table Name cannot Start or Contain Special Char.${Defualt}"
 			echo
-			./createTable.sh
+			continue
 		fi
 
 		#Checking the first char is not a Number
@@ -28,8 +29,7 @@ while [[ true ]];do
 			echo 
         	echo -e "${Red}--> ERROR: Table name cannot start with number.${Defualt}" 
 			echo
-			./createTable.sh
-		 	echo
+			continue	
 		fi
 
 		#Checking For Empty String
@@ -38,14 +38,14 @@ while [[ true ]];do
 			echo 
 			echo -e "${Red}--> ERROR: Table name can not be Empty !${Defualt}"
 			echo
-			./createTable.sh
+			continue
 		fi
 
 		if [ -f "./databases/$dbname/$tablename" ]; then
 			echo
 			echo -e "${Red}--> Table is already exsit${Defualt}" 
 			echo
-			./createTable.sh	
+			continue	
 			echo
 		fi
 	break;
@@ -66,34 +66,34 @@ while [[ true ]]; do
 		echo
 		echo -e "${Red}--> ERROR : Colnum name cannot Start or Contain Special Char.${Defualt}"
 		echo   
-		./createTable.sh    
+		continue  
 	fi
     #can not enter spaces
     if [[ $colnum =~ *" "* ]] ;then 
         echo 
         echo -e "${Red}colnum number cannot contain spaces${Defualt}"
         echo
-		./createTable.sh  
+		continue 
     fi
     #can not be empty
     if [[ "$colnum" = "" ]] ; then 
         echo 
         echo -e"${Red}Colnum number cannot contain spaces${Defualt}"
         echo
-		./createTable.sh         
+		continue       
  	fi
     #cannot be char
     if [[ $colnum =~ [A-Za-z] ]];then
         echo 
         echo -e "${Red}please enter number letters not allowed${Defualt}"
-        ./createTable.sh  
+        continue
     fi
 	#cannot be zero 
     if  [[ $colnum == 0 ]];then 
 	    echo
 	    echo -e "${Red}Colnum can not be zero !!${Defualt}"
 	    echo
-        ./createTable.sh  
+       continue
     fi
 	break;        
 done
@@ -125,7 +125,7 @@ while [[ true ]];
 				echo
 				echo -e "${Red}--> ERROR: Primary key name cannot Contain space .${Defualt}"
 				echo
-				./createTable.sh
+				continue
 		fi
 
 		#Checking that  no special char in primarykey name 
@@ -134,7 +134,7 @@ while [[ true ]];
 			echo
 			echo -e "${Red}--> ERROR : Pimary key Name cannot Start or Contain Special Char.${Defualt}"
 			echo
-			./createTable.sh
+			continue
 		fi
 
 		#Checking For Empty String
@@ -143,26 +143,27 @@ while [[ true ]];
 			echo 
 			echo -e "${Red}--> ERROR: primary key Name can Not be Empty !${Defualt}"
 			echo
-			./createTable.sh
+			continue
 		fi
 		#check if primary key name is exsist or not
 		if repeated_name $pkey $col_name ; then
 			echo
 			echo -e "${Red}----> ERROR Primarykey name cannot be Repeted ${Defualt}"
-			echo
+			continue
 		fi
 	break;	
 done 
 	
 #fill the array
 col_name+=("$pkey")
+
+#Checking the Primary key Datatype
+while [[ true ]]; do
 echo
 echo -e "${Yellow}Please Select The Primary Key datatype of the following:  ${Defualt}"
 echo -e "${Yellow}\t\t-Please Enter str For String: ${Defualt}"
 echo -e "${Yellow}\t\t-Please Enter int For Integer: ${Defualt}"
 read pkey_datatype
-#Checking the Primary key Datatype
-while [[ true ]]; do
 	case $pkey_datatype in
 		str )
 			break;;
@@ -172,7 +173,7 @@ while [[ true ]]; do
 			echo
 			echo -e "${Red}--> ERORR Please Enter A Valid Datatype !!${Defualt}"
 			echo
-			./createTable.sh
+			continue
 	esac
 break;	
 done
@@ -193,14 +194,14 @@ do
 						echo
 						echo -e "${Red}--> ERROR : primary key name cannot Contain space.${Defualt}"
 						echo
-						./createTable.sh
+						continue
 					fi
 				#Checking that no special char in Database name 
 				if [[ $name =~ ["!"?$%@"^"+="&""#"":""("")""'""}"";""{""<",.">""/"] ]];then
 						echo
 						echo -e "${Red}--> ERROR : pimary key name cannot Start or Contain Special Char.${Defualt}"
 						echo
-						./createTable.sh
+						continue
 				fi
 				#Checking the first char is not a Number
 				firstC=${name:0:1}
@@ -208,7 +209,7 @@ do
 					echo 
         			echo -e "${Red}--> ERROR: primary key name cannot start with number.${Defualt}" 
 					echo
-					./createTable.sh
+					continue
 		 			echo
 				fi
 
@@ -217,7 +218,7 @@ do
 						echo 
 						echo -e "${Red}--> ERROR: primary key name can not be Empty !${Defualt}"
 						echo
-						./createTable.sh
+						continue
 				fi
 				function repeated {
 					foundflag=1
@@ -232,20 +233,21 @@ do
 				if  repeated $name $col_name ; then
 					echo
 					echo  -e "${Red}---> ERROR Repeated column name! ${Defualt}"
-					./createTable.sh
+					continue
 				fi
 		
 		break;	
 		done
 		#adding named to the array 
      col_name+=("$name")
-	 echo
-     echo -e "${Yellow}Please Select  colnm ${i} datatype of the following: ${Defualt}"
-	 echo -e "${Yellow}\t\tPlease Enter str For String: ${Defualt}"
-	 echo -e "${Yellow}\t\tPlease Enter int For Integer:${Defualt}"
-	 read name_datatype
+	
 		#Checking data type of each array
 		while [[ true ]]; do
+		 echo
+     	 echo -e "${Yellow}Please Select  colnm ${i} datatype of the following: ${Defualt}"
+	 	 echo -e "${Yellow}\t\tPlease Enter str For String: ${Defualt}"
+		 echo -e "${Yellow}\t\tPlease Enter int For Integer:${Defualt}"
+	 	 read name_datatype
 			case $name_datatype in
 				str )
 						break;;
@@ -254,9 +256,9 @@ do
 
 				* )
 					echo -e "${Red}Please Enter A Valid Datatype :${Defualt}"
-					 	if ! read name_datatype; then
-							return
-						fi;;		
+					echo
+					continue
+							
 			esac
 		done
 	col_datatypes+=("$name_datatype")
@@ -276,4 +278,15 @@ echo
 echo -e "${Green}Table $tablename created Successfully${Defualt}"
 echo
 sleep 1 
-./submenu.sh
+echo -e "${Blue}Press any key to go back to the Table menu${Defualt}"
+echo
+read key
+
+	case $key in
+	
+	*)   
+		./submenu.sh
+		;;
+
+esac
+

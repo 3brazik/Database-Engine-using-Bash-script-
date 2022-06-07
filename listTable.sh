@@ -17,9 +17,18 @@ if [ -f "databases/$dbname/$tablename" ]; then
 		# Data
 		awk 'BEGIN{FS=":";OFS="\t   \t\t";ORS="\n";}{  $1=$1; print substr($0, 1, length($0)-1) }' "./databases/$dbname/$tablename"
 		echo
-		sleep 2
-        ./submenu.sh
-else 
+		sleep 1
+        echo -e "${Blue}Press any key to go back to the Table menu${Defualt}"
+		echo
+		read key
+		case $key in
+	
+			*)   
+				./submenu.sh
+				;;
+
+		esac
+	else 
 		echo
 		echo -e "${Red}Table is not exsits!!${Defualt}"	
 		./listTable.sh

@@ -1,4 +1,5 @@
 #!/bin/bash
+echo
 echo -e "${Blue}Listing all Tables: ${Defualt}"
 ls ./databases/$dbname/$filename
 echo
@@ -9,11 +10,10 @@ if [ -f "./databases/$dbname/$tablename" ]; then
 	    echo
 		echo -e "${Green}-----> Connected to $tablename table .....${Defualt}";
 		echo
-		echo -e "${Blue}Table $tablename Schema: ${Defualt}"
-		cat ./databases/$dbname/.$tablename.colmetadata;
-        echo
-        echo -e "${Blue}Table $tablename Data: ${Defualt}"
-        cat ./databases/$dbname/$tablename ;
+		awk -v var=$tablename 'BEGIN {FS=":"; print "\t\tTable Name: " var "\n"} {if(NR>1) printf     $1"<"$2">  \t\t"} END{printf "\n"}' "./databases/$dbname/.${tablename}.colmetadata"
+		# Data
+		awk 'BEGIN{FS=":";OFS="\t   \t\t";ORS="\n";}{  $1=$1; print substr($0, 1, length($0)-1) }' "./databases/$dbname/$tablename"
+
 		echo
 	else 
 	echo
@@ -61,4 +61,16 @@ echo
 echo -e "${Green}Here Is The Record Found.${Defualt}"
 awk -v var=$tablename 'BEGIN {FS=":"; print "\t\t\tTable Name: " var "\n"} {if(NR>1) printf " "$1"<"$2">\t\t"} END{printf "\n"}' "./databases/$dbname/.${tablename}.colmetadata"
 awk -v var=$lineNumber 'BEGIN{FS=":";OFS="    \t\t\t";ORS="\n";}{  if(NR==var){ $1=$1; print " "substr($0, 1, length($0)-2)}}' "./databases/$dbname/$tablename"
-./mainmenu.sh
+echo
+echo
+echo -e "${Blue}Press any key to go back to the Table menu${Defualt}"
+echo
+read key
+
+	case $key in
+	
+	*)   
+		./submenu.sh
+		;;
+
+esac
