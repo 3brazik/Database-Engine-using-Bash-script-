@@ -3,6 +3,7 @@ echo
 
 while [[ true ]];do
 echo -e "${Blue}Please enter table name:${Defualt}"
+echo
 read tablename
 		#----> checking if contain spaces 
 		if [[ $tablename = *" "* ]];
@@ -56,9 +57,10 @@ done
 #validate and entering colnum num <<<<
 while [[ true ]]; do 
 	echo
-	echo -e "${Green}Connected to table: $tablename ${Defualt}"
+	echo -e "${Green}${bold}Connected to table: $tablename ${Defualt}"
 	echo	
     echo -e "${Blue}Please enter colnums number: ${Defualt}"
+	echo
     read colnum
 		
     #cannot be special char 
@@ -117,7 +119,8 @@ function repeated_name {
 while [[ true ]]; 
 	do
 		echo
-		echo -e "${Blue}Enter primary key name:${Defualt}"
+		echo -e "${Blue}Please Enter Primary key name:${Defualt}"
+		echo
 		read pkey
 		#----> checking if contain spaces 
 		if [[ $pkey = *" "* ]];
@@ -141,14 +144,14 @@ while [[ true ]];
 		if [ "$pkey" = "" ];
 			then
 			echo 
-			echo -e "${Red}--> ERROR: primary key Name can Not be Empty !${Defualt}"
+			echo -e "${Red}--> ERROR: Primary key Name can Not be Empty !${Defualt}"
 			echo
 			continue
 		fi
 		#check if primary key name is exsist or not
 		if repeated_name $pkey $col_name ; then
 			echo
-			echo -e "${Red}----> ERROR Primarykey name cannot be Repeted ${Defualt}"
+			echo -e "${Red}----> ERROR Primary key name cannot be Repeted ${Defualt}"
 			continue
 		fi
 	break;	
@@ -192,14 +195,14 @@ do
 				#- checking if contain spaces 
 				if [[ $name = *" "* ]];then
 						echo
-						echo -e "${Red}--> ERROR : primary key name cannot Contain space.${Defualt}"
+						echo -e "${Red}--> ERROR : Primary key name cannot Contain space.${Defualt}"
 						echo
 						continue
 					fi
 				#Checking that no special char in Database name 
 				if [[ $name =~ ["!"?$%@"^"+="&""#"":""("")""'""}"";""{""<",.">""/"] ]];then
 						echo
-						echo -e "${Red}--> ERROR : pimary key name cannot Start or Contain Special Char.${Defualt}"
+						echo -e "${Red}--> ERROR : Pimary key name cannot Start or Contain Special Char.${Defualt}"
 						echo
 						continue
 				fi
@@ -207,7 +210,7 @@ do
 				firstC=${name:0:1}
 				if [[ $firstC =~ [0-9] ]]; then
 					echo 
-        			echo -e "${Red}--> ERROR: primary key name cannot start with number.${Defualt}" 
+        			echo -e "${Red}--> ERROR: Primary key name cannot start with number.${Defualt}" 
 					echo
 					continue
 		 			echo
@@ -216,7 +219,7 @@ do
 				#Checking For Empty String
 				if [ "$name" = "" ];then
 						echo 
-						echo -e "${Red}--> ERROR: primary key name can not be Empty !${Defualt}"
+						echo -e "${Red}--> ERROR: Primary key name can not be Empty !${Defualt}"
 						echo
 						continue
 				fi
@@ -275,7 +278,7 @@ done
 mv ./databases/$dbname/$tablename.colmetadata ./databases/$dbname/.$tablename.colmetadata
 
 echo
-echo -e "${Green}Table $tablename created Successfully${Defualt}"
+echo -e "${Green}${bold}Table $tablename created Successfully${Defualt}"
 echo
 sleep 1 
 echo -e "${Blue}Press any key to go back to the Table menu${Defualt}"

@@ -1,13 +1,19 @@
 #!/bin/bash
 clear
 echo
-echo -e "${Green}**************************************************************************************************************"
+echo -e "\t\t\t\t\t${Blue}***********************************************************************"
+echo -e "\t\t\t\t\t${Blue}***                                                                 ***"
+echo -e "\t\t\t\t\t${Blue}***        ${Green}${bold}------> Welcome To Select From Table Menu <------${Defualt}        ${Blue}***"
+echo -e "\t\t\t\t\t${Blue}***                                                                 ***"
+echo -e "\t\t\t\t\t${Blue}***                     ${Green}${bold}Connected to $dbname Database${Defualt}                    ${Blue}***"
+echo -e "\t\t\t\t\t${Blue}***                                                                 ***"
+echo -e "\t\t\t\t\t${Blue}***********************************************************************"
 echo
 echo -e "${Yellow}Please Select one of the following options :-${Defualt}"
 echo
-echo -e "\t\t1) Press 1 to ${Blue}SELECT BY PRIMARY KEY${Defualt} Table"
-echo -e "\t\t2) Press 2 to ${Blue}SELECT BY Colnum Value${Defualt} Table"
-echo -e "\t\t3) Press 3 to ${Red}Return${Defualt} back to the ${Red}Table Menu${Defualt}"
+echo -e "\t\t1) Press 1 to ${Blue}${bold}SELECT RECORD BY PRIMARY KEY${Defualt}${normal} From Table"
+echo -e "\t\t2) Press 2 to ${Blue}${bold}SELECT RECORD BY Colnum Value${Defualt}${norrmal} From Table"
+echo -e "\t\t3) Press 3 to ${Red}${bold}Return Back To Tables Menu${Defualt}"
 
 
 read option

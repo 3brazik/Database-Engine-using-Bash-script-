@@ -1,10 +1,10 @@
 #!/bin/bash
 echo
 echo -e "${Blue}Listing all databases: ${Defualt}"
-echo 
-ls -1 ./databases
 echo
-echo -e "${Blue}Press any key to go back to the main menu${Defualt}"
+ls  ./databases
+echo
+echo -e "${Blue}Press any key to go back to the main menu:${Defualt}"
 echo
 read key
 

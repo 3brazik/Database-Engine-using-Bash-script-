@@ -1,13 +1,16 @@
 #!/bin/bash
+echo
 echo -e "${Blue}Listing all Tables: ${Defualt}"
+echo
 ls ./databases/$dbname/$filename
 echo
-echo -e "${Blue}Enter table name to Select From : ${Defualt}"
+echo -e "${Blue}Enter Table Name To Delete From : ${Defualt}"
+echo
 read tablename 
 
 if [ -f "./databases/$dbname/$tablename" ]; then
 	    echo
-		echo -e "${Green}-----> Connected to $tablename table .....${Defualt}";
+		echo -e "${Green}${bold}-----> Connected to $tablename table .....${Defualt}";
 		echo
 		# Metadata
 		awk -v var=$tablename 'BEGIN {FS=":"; print "\t\tTable Name: " var "\n"} {if(NR>1) printf     $1"<"$2">  \t\t"} END{printf "\n"}' "./databases/$dbname/.${tablename}.colmetadata"
@@ -36,11 +39,13 @@ function delete_record {
 
 while [ true ]; do
 	echo -e "${Blue}Please enter primary key: ${Defualt}"
+	echo
 	read PKey
 	if delete_record "$PKey" ; then
-		echo -e "${Green}Record Deleted${Defualt}"
 		echo
-		echo -e "${Blue}Table records after deletion:${Defualt}"
+		echo -e "${Green}${bold}Record Deleted Successfully${Defualt}"
+		echo
+		echo -e "${Blue}${bold}Table $tablename Records After Deletion:${Defualt}"
 		echo
 		# Metadata
 		awk -v var=$tablename 'BEGIN {FS=":"; print "\t\tTable Name: " var "\n"} {if(NR>1) printf     $1"<"$2">  \t\t"} END{printf "\n"}' "./databases/$dbname/.${tablename}.colmetadata"

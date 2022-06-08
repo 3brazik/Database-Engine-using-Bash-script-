@@ -1,6 +1,7 @@
 #!/bin/bash
 echo
 echo -e "${Blue}Listting All Databases${Defualt}"
+echo
 ls ./databases
 echo
 echo -e "${Blue}Write Database name you want to Connect: ${Defualt}"
@@ -11,7 +12,6 @@ if [ -d "./databases/$dbname" ]; then
 	    echo
 		echo -e "${Green}Connected to $dbname database successfully ${Defualt}";
 		echo
-		sleep 1
 		export dbname
 		./submenu.sh
 		cd ./databases/$dbname;
@@ -22,4 +22,4 @@ if [ -d "./databases/$dbname" ]; then
 	
 	./connectDB.sh
 fi
-exec bash
+# exec bash

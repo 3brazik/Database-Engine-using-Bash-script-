@@ -1,9 +1,11 @@
 #!/bin/bash
 echo
 echo -e "${Blue}Listing all Tables: ${Defualt}"
+echo
 ls ./databases/$dbname/$filename
 echo
 echo -e "${Blue}Enter Table Name to Select From: ${Defualt}"
+echo
 read tablename 
 
 if [ -f "./databases/$dbname/$tablename" ]; then
@@ -59,8 +61,6 @@ record=($old_record)
 #length of the array
 length="${#record[@]}"
 
-echo -e "${Green}Here Is The Record Found.${Defualt}"
-
 getTableMetadata $dbname $tablename 
 
 #Getting colnums 
@@ -83,6 +83,7 @@ function getColumn {
 while [[ true ]]; do
 	echo
 	echo -e "${Blue}Enter Column Name To select The Record: ${Defualt}"
+	echo
 	if ! read colName; then
 		return
 	fi
@@ -110,7 +111,8 @@ done
 
 while [[ true ]]; do
 	echo
-	echo -e "${Blue}Enter Column Value To select The Record: ${Defualt}"
+	echo -e "${Blue}Enter Column Value To Select The Record: ${Defualt}"
+	echo
 	if ! read colData; then
 		return
 	fi
@@ -118,7 +120,7 @@ while [[ true ]]; do
 	#check for empty string
 	if [ "$colData" = "" ];then
 	echo 
-	echo -e "${Red}--> ERROR: colnum data can not be Empty !${Defualt}"
+	echo -e "${Red}--> ERROR: colnum Value cannot be Empty !${Defualt}"
 	continue
 	fi
 
@@ -133,9 +135,9 @@ while [[ true ]]; do
 done
 
 	echo
-	grep $colData "./databases/$dbname/${tablename}" 
+	grep -w $colData "./databases/$dbname/${tablename}" 
 	echo
-	echo -e "${Blue}If You Want To Select another Record ENTER 'y' or 'Y' to UPDATE or PRESS any key to go to previous  Menu: ${Defualt}" 
+	echo -e "${Blue}If You Want To Select Another Record ENTER 'y' or 'Y' to UPDATE or PRESS Any Key To Go To Previous Menu: ${Defualt}" 
 	read 
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]

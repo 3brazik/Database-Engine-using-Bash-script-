@@ -5,10 +5,11 @@ echo
 ls ./databases/$dbname/$filename
 echo
 echo -e "${Blue}Enter table name to UPDATE: ${Defualt}"
+echo
 read tablename 
 if [ -f "./databases/$dbname/$tablename" ]; then
 	    echo
-		echo -e "${Green}-----> Connected to $tablename table .....${Defualt}";
+		echo -e "${Green}${bold}--> Connected to $tablename Table ${Defualt}";
 		echo
 		# Metadata
 		awk -v var=$tablename 'BEGIN {FS=":"; print "\t\tTable Name: " var "\n"} {if(NR>1) printf     $1"<"$2">  \t\t"} END{printf "\n"}' "./databases/$dbname/.${tablename}.colmetadata"
@@ -149,6 +150,7 @@ for (( i = 1; i <= $numColumns-2; i++ )); do
 	echo 
 	while [[ true ]]; do
 		echo -e "${Blue}Enter Column Name To Update The Record: ${Defualt}"
+		echo
 		if ! read colName; then
 			return
 		fi
@@ -174,6 +176,7 @@ for (( i = 1; i <= $numColumns-2; i++ )); do
 	done
 
 	while [[ true ]]; do
+		echo
 		echo -e "${Blue}Enter New value Of ${colNames[$index]} : ${Defualt}"
 		if ! read newValue; then
 			return
@@ -193,7 +196,7 @@ for (( i = 1; i <= $numColumns-2; i++ )); do
 		#validate the datatype
 		if ! check_type "${colTypes[$index]}" "$newValue"; then
 			echo 
-			echo  -e "${Red}---> ERROR: Datatype Mismatch Error, Please Follow The Above Schema Datatype !${Defualt}"
+			echo  -e "${Red}---> ERROR: Datatype Mismatch, Please Follow The Above Schema Datatype !${Defualt}"
 			continue
 		fi
 		break
@@ -206,9 +209,10 @@ for (( i = 1; i <= $numColumns-2; i++ )); do
 	#saving new record to the Table
 	sed -i 's/^'"$pkeyValue"':.*$/'"$newRecord":'/' "./databases/$dbname/$tablename"
 	echo 
-	echo -e "${Green}Record Updated Successfully${Defualt}"
+	echo -e "${Green}${bold}Record Updated Successfully${Defualt}"
 	echo
-	echo -e "${Blue}Table $tablename values after UPDATE: ${Defualt}"
+	echo -e "${Blue}Table $tablename Values After UPDATE ${Defualt}"
+	echo
 	# Metadata
 	awk -v var=$tablename 'BEGIN {FS=":"; print "\t\tTable Name: " var "\n"} {if(NR>1) printf     $1"<"$2">  \t\t"} END{printf "\n"}' "./databases/$dbname/.${tablename}.colmetadata"
 	# Data
@@ -216,7 +220,7 @@ for (( i = 1; i <= $numColumns-2; i++ )); do
 	echo
 	# check if user want to update again in the record
 	echo
-	echo -e "${Blue}If You Want To UPDATE another value ENTER 'y' or 'Y' to UPDATE or PRESS any key to go to previous Main Menu: ${Defualt}" 
+	echo -e "${Blue}If You Want To UPDATE Another Value ENTER 'y' or 'Y' to UPDATE or PRESS Any Key to Go to Previous  Menu: ${Defualt}" 
 	read 
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]

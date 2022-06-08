@@ -5,15 +5,17 @@ echo
 ls ./databases/$dbname/$filename
 echo
 echo -e "${Blue}Please enter Table name to DROP: ${Defualt}"
+echo
 read filename
 if [ -f "./databases/$dbname/$filename" ]
 then
 	echo
- 	echo -e "${Blue}Deleting Table.........${Defualt}"
+ 	echo -e "${Yellow}Deleting Table...${Defualt}"
 	rm  ./databases/$dbname/$filename
 	rm 	./databases/$dbname/.$filename.colmetadata
 	echo
-	echo -e "${Green}Table deleted succesfully${Defualt}"
+	echo -e "${Green}${bold}Table deleted succesfully${Defualt}"
+	echo
 	sleep 1 
 	echo -e "${Blue}Press any key to go back to the main menu${Defualt}"
 	echo
@@ -21,7 +23,7 @@ then
 	case $key in
 	
 		*)   
-			./mainmenu.sh
+			./submenu.sh
 			;;
 
 	esac

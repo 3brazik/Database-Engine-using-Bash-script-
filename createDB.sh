@@ -1,7 +1,7 @@
 #!/bin/bash
 export PS2="Create-DB >"
 echo 
-echo -e "${Green}------>  Create Database  <------${Defualt}"
+echo -e "${Green}${bold}------>  Create Database  <------${Defualt}"
 echo
 echo -e "${Blue}Please Enter Database Name: ${Defualt}"
 echo
@@ -53,7 +53,7 @@ while [[ true ]];do
 	then
 	 	mkdir ./databases/$dbname;
 		echo
-		echo -e "${Green}Database $dbname  is Created sucsessfully.${Defualt}"
+		echo -e "${Green}Database ${bold}$dbname${normal}${Green} is Created sucsessfully.${Defualt}"
 		echo
 		sleep 1
 		echo -e "${Blue}Press any key to go back to the main menu${Defualt}"
