@@ -42,7 +42,7 @@ function getRecord {
 }
 
 function getTableMetadata {
-	tblname=$2
+	
 	#array of columns names
 	colNames=()
 	#array of columns datatype
