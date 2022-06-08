@@ -24,5 +24,5 @@ there will be new Screen with this Menu (Table manipulation menu):
     • Delete From Table
     • Back To Main Menu
 
-This Project is Implemented By ( Mohamed Magdy & Mohamed AbdelRazik )
+This Project is Implemented By ( Mohamed AbdelRazik & Mohamed Magdy )
 Demo Video Link: (https://drive.google.com/file/d/1Nim6HLsQvER7c1G1bygzLC9cyZXF7RlP/view?usp=sharing)
