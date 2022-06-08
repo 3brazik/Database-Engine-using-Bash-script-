@@ -194,14 +194,14 @@ do
 				#- checking if contain spaces 
 				if [[ $name = *" "* ]];then
 						echo
-						echo -e "${Red}--> ERROR : Primary key name cannot Contain space.${Defualt}"
+						echo -e "${Red}--> ERROR :colnum name cannot Contain space.${Defualt}"
 						echo
 						continue
 					fi
 				#Checking that no special char in Database name 
 				if [[ $name =~ ["!"?$%@"^"+="&""#"":""("")""'""}"";""{""<",.">""/"] ]];then
 						echo
-						echo -e "${Red}--> ERROR : Pimary key name cannot Start or Contain Special Char.${Defualt}"
+						echo -e "${Red}--> ERROR : Colnum name cannot Start or Contain Special Char.${Defualt}"
 						echo
 						continue
 				fi
@@ -209,7 +209,7 @@ do
 				firstC=${name:0:1}
 				if [[ $firstC =~ [0-9] ]]; then
 					echo 
-        			echo -e "${Red}--> ERROR: Primary key name cannot start with number.${Defualt}" 
+        			echo -e "${Red}--> ERROR:colnum name cannot start with number.${Defualt}" 
 					echo
 					continue
 		 			echo
@@ -218,7 +218,7 @@ do
 				#Checking For Empty String
 				if [ "$name" = "" ];then
 						echo 
-						echo -e "${Red}--> ERROR: Primary key name can not be Empty !${Defualt}"
+						echo -e "${Red}--> ERROR: Colnum name can not be Empty !${Defualt}"
 						echo
 						continue
 				fi

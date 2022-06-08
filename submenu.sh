@@ -6,7 +6,7 @@ echo -e "\t\t\t\t\t${Blue}******************************************************
 echo -e "\t\t\t\t\t${Blue}***                                                                 ***"
 echo -e "\t\t\t\t\t${Blue}***             ${Green}${bold}------> Welcome To Tables Menu <------${Defualt}              ${Blue}***"
 echo -e "\t\t\t\t\t${Blue}***                                                                 ***"
-echo -e "\t\t\t\t\t${Blue}***                     ${Green}${bold}Connected to $dbname Database${Defualt}                    ${Blue}***"
+echo -e "\t\t\t\t\t${Blue}***                     ${Green}${bold}Connected to $dbname Database${Defualt}                   ${Blue}***"
 echo -e "\t\t\t\t\t${Blue}***                                                                 ***"
 echo -e "\t\t\t\t\t${Blue}***********************************************************************"
 echo
