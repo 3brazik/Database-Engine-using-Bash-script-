@@ -1,6 +1,5 @@
 #!/bin/bash
 echo
-
 while [[ true ]];do
 echo -e "${Blue}Please enter table name:${Defualt}"
 echo
