@@ -241,7 +241,7 @@ do
 		break;	
 		done
 		#adding named to the array 
-     col_name+=("$name")
+     	col_name+=("$name")
 	
 		#Checking data type of each array
 		while [[ true ]]; do
