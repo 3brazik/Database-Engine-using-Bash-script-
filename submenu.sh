@@ -1,5 +1,7 @@
 #!/bin/bash
+
 clear
+
 echo
 echo
 echo -e "\t\t\t\t\t${Blue}***********************************************************************"
@@ -12,8 +14,10 @@ echo -e "\t\t\t\t\t${Blue}******************************************************
 echo
 echo
 echo
+
 echo -e "${Yellow}Please Select one of the following options :-${Defualt}"
 echo
+
 echo -e "\t\t1) Press 1 to ${Blue}${bold}CREATE${Defualt} Table"
 echo -e "\t\t2) Press 2 to ${Blue}${bold}LIST${Defualt} Table"
 echo -e "\t\t3) Press 3 to ${Blue}${bold}DROP${Defualt} Table"

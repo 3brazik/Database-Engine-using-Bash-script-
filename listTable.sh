@@ -36,4 +36,3 @@ if [ -f "databases/$dbname/$tablename" ]; then
 		./listTable.sh
 fi
 
-

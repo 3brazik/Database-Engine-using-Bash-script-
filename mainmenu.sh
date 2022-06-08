@@ -1,5 +1,6 @@
 #!/bin/bash
 clear
+
 #colors
 export Defualt='\033[0m'       	 # Text Reset
 export Red='\033[0;31m'          # Red
@@ -8,6 +9,7 @@ export Yellow='\033[0;33m'       # Yellow
 export Blue='\033[0;34m'         # Blue
 export bold=$(tput bold)
 export normal=$(tput sgr0)
+
 echo
 echo -e "\t\t\t\t\t${Blue}***********************************************************************"
 echo -e "\t\t\t\t\t${Blue}***                                                                 ***"
@@ -47,8 +49,5 @@ read option
 		;;
 
 esac
-
-
-
 
 

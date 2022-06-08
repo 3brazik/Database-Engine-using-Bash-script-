@@ -1,11 +1,14 @@
 #!/bin/bash
+
 echo
 echo -e "${Blue}Listing all Tables: ${Defualt}"
 echo
 ls ./databases/$dbname/$filename
 echo
+
 echo -e "${Blue}Enter table name to UPDATE: ${Defualt}"
 echo
+
 read tablename 
 if [ -f "./databases/$dbname/$tablename" ]; then
 	    echo

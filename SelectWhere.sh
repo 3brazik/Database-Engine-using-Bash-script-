@@ -1,4 +1,5 @@
 #!/bin/bash
+
 echo
 echo -e "${Blue}Listing all Tables: ${Defualt}"
 echo

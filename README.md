@@ -1,12 +1,12 @@
 
 # Database Engine Using Bash Shell Script (DBMS)
 
-The Project aim to develop DBMS 
+The Project aim to develop DBMS using Bash Script
 
 The Project Features:
 
 The Application will be CLI Menu based app,
-    that provide this Menu items: 
+    that provide these Menu items (Database manipulation menu): 
     
     Main Menu:
     • Create Database
@@ -14,7 +14,7 @@ The Application will be CLI Menu based app,
     • Connect To Databases
     • Drop Database
 
-there will be new Screen with this Menu:
+there will be new Screen with this Menu(Table manipulation menu):
 
     • Create Table
     • List Tables
@@ -24,6 +24,5 @@ there will be new Screen with this Menu:
     • Delete From Table
     • Back To Main Menu
 
-This Project is Implemented By ( Mohamed AbdelRazik & Mohamed Magdy)
-The Video 
-For Link (https://drive.google.com/file/d/1Nim6HLsQvER7c1G1bygzLC9cyZXF7RlP/view?usp=sharing)
+This Project is Implemented By ( Mohamed Magdy & Mohamed AbdelRazik )
+Demo Video Link: (https://drive.google.com/file/d/1Nim6HLsQvER7c1G1bygzLC9cyZXF7RlP/view?usp=sharing)
