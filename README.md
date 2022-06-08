@@ -14,7 +14,7 @@ The Application will be CLI Menu based app,
     • Connect To Databases
     • Drop Database
 
-there will be new Screen with this Menu(Table manipulation menu):
+there will be new Screen with this Menu (Table manipulation menu):
 
     • Create Table
     • List Tables
