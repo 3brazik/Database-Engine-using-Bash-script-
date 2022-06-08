@@ -13,7 +13,7 @@ The Application will be CLI Menu based app, that will provide to user this Menu 
     • Connect To Databases
     • Drop Database
 
-Up on user Connect to Specific Database, there will be new Screen with this Menu:
+there will be new Screen with this Menu:
 
     • Create Table
     • List Tables
@@ -22,12 +22,6 @@ Up on user Connect to Specific Database, there will be new Screen with this Menu
     • Select From Table
     • Delete From Table
     • Back To Main Menu
-
-There will be new screen when user selects from table :
-
-    • Select All Records
-    • Select Record By Primary Key
-    • Back To Connect To Database Menu
 
 This Project is Implemented By ( Mohamed AbdelRazik & Mohamed Magdy)
 The Video within The Folder
