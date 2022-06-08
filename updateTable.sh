@@ -207,10 +207,8 @@ for (( i = 1; i <= $numColumns-2; i++ )); do
  
 	#updating the old record
 	record[$index]="$newValue"
-
 	#converting array to string
 	newRecord=$( IFS=$':'; echo "${record[*]}" )
-
 	#saving new record to the Table
 	sed -i 's/^'"$pkeyValue"':.*$/'"$newRecord":'/' "./databases/$dbname/$tablename"
 	echo 
@@ -218,14 +216,11 @@ for (( i = 1; i <= $numColumns-2; i++ )); do
 	echo
 	echo -e "${Blue}Table $tablename Values After UPDATE ${Defualt}"
 	echo
-
 	# Metadata
 	awk -v var=$tablename 'BEGIN {FS=":"; print "\t\tTable Name: " var "\n"} {if(NR>1) printf     $1"<"$2">  \t\t"} END{printf "\n"}' "./databases/$dbname/.${tablename}.colmetadata"
-	
 	# Data
 	awk 'BEGIN{FS=":";OFS="\t   \t\t";ORS="\n";}{  $1=$1; print substr($0, 1, length($0)-1) }' "./databases/$dbname/$tablename"
 	echo
-	
 	# check if user want to update again in the record
 	echo
 	echo -e "${Blue}If You Want To UPDATE Another Value ENTER 'y' or 'Y' to UPDATE or PRESS Any Key to Go to Previous  Menu: ${Defualt}" 
