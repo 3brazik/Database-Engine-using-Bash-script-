@@ -3,10 +3,8 @@
 
 The Project aim to develop DBMS using Bash Script
 
-The Project Features:
-
-The Application will be CLI Menu based app,
-    that provide these Menu items (Database manipulation menu): 
+The Application will be CLI Menu based app
+that provide these Menu items (Database manipulation menu): 
     
     Main Menu:
     • Create Database
